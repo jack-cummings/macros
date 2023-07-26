@@ -8,7 +8,7 @@
 
 
     <!-- Bootstrap CSS / Color Scheme -->
-    <link rel="stylesheet" href="assets/css/journal.css" id="theme-color">
+    <link rel="stylesheet" href="assets/css/red.css" id="theme-color">
 </head>
 <body>
 
@@ -22,56 +22,58 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Home
-            <span class="visually-hidden">(current)</span>
+          <a class="h2" href="#">MACROS
+            <span class="visually-hidden"> </span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Separated link</a>
-          </div>
-        </li>
+
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#">Pricing</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#">About</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item dropdown">-->
+<!--          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>-->
+<!--          <div class="dropdown-menu">-->
+<!--            <a class="dropdown-item" href="#">Action</a>-->
+<!--            <a class="dropdown-item" href="#">Another action</a>-->
+<!--            <a class="dropdown-item" href="#">Something else here</a>-->
+<!--            <div class="dropdown-divider"></div>-->
+<!--            <a class="dropdown-item" href="#">Separated link</a>-->
+<!--          </div>-->
+<!--        </li>-->
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+<!--      <form class="d-flex">-->
+<!--        <input class="form-control me-sm-2" type="text" placeholder="Search">-->
+<!--        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>-->
+<!--      </form>-->
     </div>
   </div>
 </nav>
 
 <!--Generic section-->
-<section class="py-7 bg-dark" id="test">
+<section class="bg-dark" id="input">
     <div class="container">
         <div class="row pt-3 pricing-table mx-auto">
             <div class="col-12 mx-auto">
-
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title">What would you like to do?</h2>
-                            <div class="text-muted font-weight-medium mt-2"> </div>
-                                <div class="btn-group-sm" role="group" aria-label="Basic example">
-                                    <a href='/input'class="btn btn-primary">Add a Restaurant</a>
-                                    <br><br>
-                                    <a href='/search'class="btn btn-primary">Decide Where to Eat</a>
+                            <h2 class="card-title">What Did You Eat Today?</h2>
+                            <div class="text-muted font-weight-medium mt-2"></div>
+                            <form method="POST" action="query">
+                                <div class="form-group">
+                                <label for="textInput"></label>
+                                <textarea class="form-control" id="textInput" rows="3" placeholder = "A serving of cheesy grits, 2 eggs, a half cup of white rice, and a quarter bag of trader joe's orange chicken"></textarea>
+                              </div>
+                                <div class="form-group">
+                                        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
                                 </div>
+                            </form>
                         </div>
                     </div>
                 </div>
+                <h2 class="card-title">{{ answer }}</h2>
             </div>
         </div>
     </div>
