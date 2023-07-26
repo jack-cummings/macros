@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Raleatz</title>
+    <title>Macros</title>
 
 
     <!-- Bootstrap CSS / Color Scheme -->
@@ -61,17 +61,17 @@
                         <div class="card-body">
                             <h2 class="card-title">What Did You Eat Today?</h2>
                             <div class="text-muted font-weight-medium mt-2"></div>
-                            <form method="POST" action="query">
+                            <form method="post" action="query">
                                 <div class="form-group">
-                                <label for="textInput"></label>
-                                <textarea class="form-control" id="textInput" rows="3" placeholder = "A serving of cheesy grits, 2 eggs, a half cup of white rice, and a quarter bag of trader joe's orange chicken"></textarea>
-                              </div>
-                                <div class="form-group">
-                                        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                                <textarea id="query" name="query" placeholder="A serving of cheesy grits, 2 eggs and a half cup of white rice, and a quarter bag of trader joe's orange chicken"
+                                          type="text" class="form-control"></textarea>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
+                                <div class="form-group">
+                                    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                             </form>
+                            </div>
+                     </div>
                 </div>
                 <h2 class="card-title">{{ answer }}</h2>
             </div>

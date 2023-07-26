@@ -31,9 +31,11 @@ async def home(request: Request):
 async def query(request: Request):
     try:
         body = await request.body()
-        base = body.decode('UTF-8').strip()
+        base = body.decode('UTF-8').split('&')[0].split('=')[1].replace('+',' '
+                                                                        ).replace('%2C',',').replace('%0D',''
+                                                                                                     ).replace('%0A','')
         print(base)
-        prompt = f"""today I've eaten {base}.
+        prompt = f"""Today I've eaten {base}.
          How many grams of protein and calories have I eaten? Show your work"""
 
 
