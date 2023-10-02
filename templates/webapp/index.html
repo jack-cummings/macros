@@ -22,7 +22,7 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="h2" href="#">MACROS
+          <a class="h2" href="/">MACROS
             <span class="visually-hidden"> </span>
           </a>
         </li>
@@ -63,7 +63,7 @@
                             <div class="text-muted font-weight-medium mt-2"></div>
                             <form method="post" action="query">
                                 <div class="form-group">
-                                <textarea id="query" name="query" placeholder="A serving of cheesy grits, 2 eggs and a half cup of white rice, and a quarter bag of trader joe's orange chicken"
+                                <textarea id="query" name="query" placeholder="A serving of cheesy grits, 2 eggs, a half cup of white rice, and a quarter bag of trader joe's orange chicken"
                                           type="text" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group">
@@ -73,7 +73,9 @@
                             </div>
                      </div>
                 </div>
-                <h2 class="card-title">{{ answer }}</h2>
+                <div class="card-body">
+                    <div class="text-muted font-weight-medium mt-2">{{ answer|safe }}</div>
+                </div>
             </div>
         </div>
     </div>

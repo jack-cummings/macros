@@ -1,62 +1,23 @@
-import pandas as pd
-from fastapi import FastAPI, Request, BackgroundTasks, Response, Cookie
-from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import RedirectResponse
-import uvicorn
-import os
-import openai
 
+from seleniumwire import webdriver  # Import from seleniumwire
 
+# Create a new instance of the Chrome driver
+# other Chrome options
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--headless')
+chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
+driver = webdriver.Chrome(options=chrome_options)
+#driver = webdriver.Chrome()
 
-# Launch app and mount assets
-app = FastAPI()
-app.mount("/assets", StaticFiles(directory="assets"), name="assets")
-templates = Jinja2Templates(directory="templates/webapp")
-openai.api_key = os.environ['oaik']
+# Go to the Google home page
+driver.get('https://www.harristeeter.com/weeklyad')
 
-
-
-@app.get("/")
-async def home(request: Request):
-    try:
-        answer = ''
-        return templates.TemplateResponse('index.html', {"request": request, 'answer':answer})
-
-    except Exception as e:
-        print(e)
-        return templates.TemplateResponse('error.html', {"request": request})
-
-@app.post('/query')
-async def query(request: Request):
-    try:
-        body = await request.body()
-        base = body.decode('UTF-8').split('&')[0].split('=')[1].replace('+',' '
-                                                                        ).replace('%2C',',').replace('%0D',''
-                                                                                                     ).replace('%0A','')
-        print(base)
-        prompt = f"""Today I've eaten {base}.
-         How many grams of protein and calories have I eaten? Show your work"""
-
-
-        # completion = openai.ChatCompletion.create(
-        #     model="gpt-3.5-turbo",
-        #     messages=[
-        #         {"role": "system", "content": "You are a helpful assistant."},
-        #         {"role": "user", "content": prompt}
-        #     ]
-        # )
-        #
-        # answer = completion.choices[0].message
-
-        answer=prompt
-
-        return templates.TemplateResponse('index.html', {"request": request, 'answer':answer})
-
-    except Exception as e:
-        print(e)
-        return templates.TemplateResponse('error.html', {"request": request})
-
-if __name__ == '__main__':
-    if os.environ['MODE'] == 'dev':
-        uvicorn.run(app, port=4242, host='0.0.0.0')
+# Access requests via the `requests` attribute
+for request in driver.requests:
+    if request.response:
+        if request.url.startswith(('https://dam.flippenterprise.net/flyerkit/publications/harristeeter?')):
+            print(
+                request.url,
+                request.response.status_code,
+                request.response.headers['Content-Type']
+            )
