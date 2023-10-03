@@ -4,6 +4,8 @@ import requests
 import re
 import pandas as pd
 import json
+import os
+import openai
 
 def create_driver():
     # Create a new instance of the Chrome driver
@@ -54,33 +56,25 @@ def get_products(product_url):
     foods = df['name'].to_list()
     return foods
 
-#main
+def get_meals(foods):
+    prompt = f"""List the names and key ingredients of 10 dinner recipes that could be cooked using some of the ingredients
+                below and other items typically found in grocery stores as json objects. {' ,'.join(food)}"""
+    openai.api_key = os.environ['oaik']
+    completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": prompt}])
+    meals = completion.choices[0].message['content']
+    return meals
 
-user_zip = '27615'
-product_url = root_scrape(user_zip)
-food = get_products(product_url)
-prompt = f"""using the below list and other items commonly found in a grocery store, " 
-         create five dinner recipes. You do not need to use every item. {', '.join(food)}
-         Return the recipe names, steps to cook them and required ingredients in the following format:
-            This Week's Meals:
-            Meal 1
-            Meal 2
-            Meal 3
-            Meal 4
-            Meal 5
-            
-            Recipes:
-            Recipe 1 
-            Recipe 2
-            Recipe 3
-            Recipe 4
-            Recipe 5
-            
-            Grocery List:
-            All required ingredients."""
+def main(user_email,user_zip):
+    product_url = root_scrape(user_zip)
+    food = get_products(product_url)
+    meals = get_meals(food)
+    return meals
 
 
-print(' ,'.join(food))
+
+
 
 # user_zip = '27609'
 # product_url1 = root_scrape(user_zip)
