@@ -1,5 +1,5 @@
 from Scrapers import HT_Scraper
-from utils import pull_db, get_meals, send_email, write_email
+from utils import pull_db, get_meals, send_email, write_email, get_pics
 
 
 def main(user_zip, brand):
@@ -13,9 +13,10 @@ def main(user_zip, brand):
 
 entries = pull_db().values.tolist()
 for entry in entries:
-    meals = main(entry[1], entry[2])
+    meals = main(entry[3], entry[2])
+    get_pics(meals)
     print(write_email(meals))
-    #send_email(entry[0])
+    #send_email(entry[1])
 
 
 # # Access requests via the `requests` attribute
