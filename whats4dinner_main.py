@@ -14,9 +14,10 @@ def main(user_zip, brand):
 entries = pull_db().values.tolist()
 for entry in entries:
     meals = main(entry[3], entry[2])
-    get_pics(meals)
-    print(write_email(meals))
-    #send_email(entry[1])
+    urls = get_pics(meals)
+    content = write_email(meals,urls)
+    # send_email(entry[1])
+    send_email(content)
 
 
 # # Access requests via the `requests` attribute
